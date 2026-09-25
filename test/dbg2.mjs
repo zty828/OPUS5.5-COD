@@ -1,0 +1,15 @@
+import { chromium } from 'playwright';
+const browser = await chromium.launch({ args: ['--use-gl=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--js-flags=--max-old-space-size=700'] });
+const page = await browser.newPage({ viewport: { width: 640, height: 360 } });
+page.on('console', m => console.log(`[${m.type()}] ${m.text()}`.slice(0, 300)));
+page.on('pageerror', e => console.log('[pageerror] ' + e.message + '\n' + (e.stack || '').split('\n').slice(0, 4).join('\n')));
+page.on('crash', () => { console.log('CRASH'); process.exit(1); });
+await page.addInitScript(() => localStorage.setItem('mf_settings', JSON.stringify({ quality: 'low' })));
+await page.addInitScript(() => { HTMLCanvasElement.prototype.requestPointerLock = function () { return Promise.resolve(); }; });
+await page.goto('http://localhost:8080/index.html');
+await page.waitForFunction(() => window.game && window.game.state === 'menu', null, { timeout: 120000 });
+setTimeout(() => { console.log('KILL TIMEOUT'); process.exit(2); }, +(process.env.T || 60000));
+const r = await page.evaluate(process.argv[2].replace('new THREE.Vector3', 'new game.camera.position.constructor'));
+console.log('RESULT', JSON.stringify(r));
+await browser.close();
+process.exit(0);

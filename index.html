@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>现代战线 · MODERN FRONTLINE</title>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{ "imports": { "three": "./lib/three.module.js", "three/addons/": "./lib/jsm/" } }
+</script>
+</head>
+<body>
+<div id="app"></div>
+
+<!-- 加载 -->
+<div id="loading">
+  <div class="load-inner">
+    <div class="logo"><span class="l1">现代战线</span><span class="l2">MODERN FRONTLINE</span></div>
+    <div class="load-bar"><div id="loadFill"></div></div>
+    <div id="loadText">正在生成材质…</div>
+    <div class="load-tip">提示：冲刺时按下 C 可以进行战术滑铲</div>
+  </div>
+</div>
+
+<!-- HUD -->
+<div id="hud" class="hidden">
+  <div id="vignette"></div>
+  <div id="nvgFrame" class="hidden"></div>
+  <div id="scope" class="hidden"><div class="scope-hole"></div><div class="scope-h"></div><div class="scope-v"></div><div class="scope-dot"></div></div>
+  <div id="crosshair"><i class="ct"></i><i class="cb"></i><i class="cl"></i><i class="cr"></i></div>
+  <div id="hitmarker"><i></i><i></i><i></i><i></i></div>
+  <div id="dmgDirs"></div>
+  <div id="markers"></div>
+  <div id="compass"><div id="compassStrip"></div><div class="compass-tick"></div></div>
+  <div id="minimapWrap"><canvas id="minimap" width="220" height="220"></canvas><div id="mmLabel"></div></div>
+  <div id="scorebar"></div>
+  <div id="killfeed"></div>
+  <div id="objective"></div>
+  <div id="ammoBox">
+    <div id="weaponName"></div>
+    <div class="ammo-row"><span id="ammoMag">30</span><span id="ammoRes">/ 120</span></div>
+    <div id="equipRow"></div>
+  </div>
+  <div id="healthBox"><div id="healthFill"></div></div>
+  <div id="streaks"></div>
+  <div id="popups"></div>
+  <div id="prompt"></div>
+  <div id="progress"><div id="progressFill"></div></div>
+  <div id="subtitles"></div>
+  <div id="announce"></div>
+  <div id="enemyName"></div>
+  <div id="alertEdge"></div>
+  <div id="fps"></div>
+  <div id="flashOverlay"></div>
+  <div id="fade"></div>
+</div>
+
+<div id="deathScreen" class="hidden">
+  <div class="death-inner">
+    <div class="death-title">你已阵亡</div>
+    <div id="killerInfo"></div>
+    <div id="respawnText"></div>
+    <div class="death-btns"><button id="btnChangeClass" class="btn small">更换装备 [C]</button></div>
+  </div>
+</div>
+
+<div id="scoreboard" class="hidden"></div>
+
+<!-- 菜单层 -->
+<div id="menu"></div>
+
+<div id="clickToPlay" class="hidden"><div>点击屏幕继续</div></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
